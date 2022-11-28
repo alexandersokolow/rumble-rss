@@ -12,7 +12,8 @@ const getRumblePosts = async (channelName) => {
       const url_rel = $(".video-item--a", item).attr("href");
       const url_abs = `https://rumble.com${url_rel}`;
       const date = $(".video-item--time", item).attr("datetime");
-      const description = `This is a video by ${channelName}!`;
+      const duration = $(".video-item--duration", item).attr("data-value");
+      const description = `Video duration: ${duration}!`;
       return { title, link: url_abs, date, description };
     });
     return posts;
