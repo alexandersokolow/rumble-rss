@@ -1,31 +1,25 @@
 const xml = require("xml");
 
-const buildFeed = (posts) => {
+const getFeedItems = (posts) => {
   const sortedPosts = posts.sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
-  const feedItems = [];
-  feedItems.push(
-    ...sortedPosts.map(function (post) {
-      const feedItem = {
-        item: [
-          { title: post.title },
-          {
-            pubDate: new Date(post.date).toUTCString(),
-          },
-          {
-            guid: [{ _attr: { isPermaLink: true } }, post.link],
-          },
-          {
-            description: {
-              _cdata: post.description,
-            },
-          },
-        ],
-      };
-      return feedItem;
-    })
-  );
+  const feedItems = sortedPosts.map((post) => ({
+    item: [
+      { title: post.title },
+      {
+        pubDate: new Date(post.date).toUTCString(),
+      },
+      {
+        guid: [{ _attr: { isPermaLink: true } }, post.link],
+      },
+      {
+        description: {
+          _cdata: post.description,
+        },
+      },
+    ],
+  }));
   return feedItems;
 };
 
@@ -58,13 +52,12 @@ const getRSSFeed = async (website, posts) => {
           },
           { description: website.description },
           { language: "en-US" },
-          ...buildFeed(posts),
+          ...getFeedItems(posts),
         ],
       },
     ],
   };
-  const feed = '<?xml version="1.0" encoding="UTF-8"?>' + xml(feedObject);
-  return feed;
+  return '<?xml version="1.0" encoding="UTF-8"?>' + xml(feedObject);
 };
 
 module.exports = { getRSSFeed };

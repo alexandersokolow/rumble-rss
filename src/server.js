@@ -1,6 +1,8 @@
 const express = require("express");
-const router = express.Router();
 const cors = require('cors');
+
+const router = express.Router();
+var corsOptions = { origin: "*" };
 
 const { getRSSFeed } = require("./util/generator");
 const { getRumblePosts } = require("./posts/rumble");
@@ -24,7 +26,6 @@ router.get("/rumble/:channel", async (req, res) => {
 });
 
 const app = express();
-var corsOptions = { origin: "*" };
 app.use(cors(corsOptions));
 app.use(router);
 app.listen(9000);
