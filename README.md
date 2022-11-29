@@ -8,6 +8,9 @@ This little API can be used to generate RSS feeds, currently only for Rumble.
 2. Fetch the name of a Rumble channel (i.e. https://rumble.com/c/{channelname})
 3. Get the RSS feed by calling http://{hostname}/rumble/{channelname}
 
+Note: I am already running this myself on http://rssgen.xyz, so you can use that instead of running your own server.
+I.e., you can get the feed by calling http://rssgen.xyz/rumble/{channelname}
+
 ## How to contribute
 
 Want to generate feeds for something other than Rumble?
