@@ -18,6 +18,13 @@ const getFeedItems = (posts) => {
           _cdata: post.description,
         },
       },
+      {
+        image: [
+          { url: post.thumbnail },
+          { title: post.title },
+          { link: post.link }
+        ],
+      },
     ],
   }));
   return feedItems;
