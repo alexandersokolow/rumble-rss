@@ -18,13 +18,8 @@ const getFeedItems = (posts) => {
           _cdata: post.description,
         },
       },
-      {
-        image: [
-          { url: post.thumbnail },
-          { title: post.title },
-          { link: post.link }
-        ],
-      },
+      { "itunes:image": [{ _attr: { href: post.thumbnail } }] },
+      { "media:thumbnail": [{ _attr: { url: post.thumbnail } }] },
     ],
   }));
   return feedItems;
