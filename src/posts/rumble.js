@@ -1,14 +1,18 @@
 const rp = require("request-promise");
 const cheerio = require("cheerio");
 
-const getRumblePosts = async (channelName) => {
+const getChannelHtml = async (channelName) => {
   const url = `https://rumble.com/c/${channelName}`;
-  let html = "";
+  const alt_url = `https://rumble.com/user/${channelName}`;
   try {
-    html = await rp(url);
+    return await rp(url);
   } catch {
-    html = await rp(`https://rumble.com/user/${channelName}`);
+    return await rp(alt_url);
   }
+};
+
+const getRumblePosts = async (channelName) => {
+  const html = await getChannelHtml(channelName);
   const $ = cheerio.load(html);
   const items = $(".video-listing-entry", html).toArray();
   const posts = items.map((item) => {
