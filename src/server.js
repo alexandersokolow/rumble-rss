@@ -4,10 +4,10 @@ const cors = require('cors');
 const router = express.Router();
 var corsOptions = { origin: "*" };
 
-const { getRSSFeed } = require("./util/generator");
-const { getRumblePosts } = require("./posts/rumble");
+const { getRSSFeed } = require("./generateFeed");
+const { getRumblePosts } = require("./parsePosts");
 
-router.get("/rumble/:channel", async (req, res) => {
+router.get("/:channel", async (req, res) => {
   try {
     const { channel } = req.params;
     const posts = await getRumblePosts(channel);
