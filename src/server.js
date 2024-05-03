@@ -7,7 +7,7 @@ var corsOptions = { origin: "*" };
 const { getRSSFeed } = require("./generateFeed");
 const { getRumblePosts } = require("./parsePosts");
 
-router.get("/:channel", async (req, res) => {
+const get = async (req, res) => {
   try {
     const { channel } = req.params;
     const posts = await getRumblePosts(channel);
@@ -23,7 +23,10 @@ router.get("/:channel", async (req, res) => {
   } catch (err) {
     res.status(404).send();
   }
-});
+}
+
+router.get("/:channel", get);
+router.get("/rumble/:channel", get); // legacy support
 
 const app = express();
 app.use(cors(corsOptions));
