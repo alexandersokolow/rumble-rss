@@ -32,7 +32,6 @@ const getRumblePosts = async (channelName) => {
     const description = `Duration: ${duration}<br/>Views: ${views}<br/>Comments: ${comments}`;
     return { title, link: url_abs, thumbnail, date, description, comments };
   });
-  console.log("posts: ", posts);
   return posts;
 };
 
