@@ -7,6 +7,7 @@ const getFeedItems = (posts) => {
   const feedItems = sortedPosts.map((post) => ({
     item: [
       { title: post.title },
+      { link: post.link },
       {
         pubDate: new Date(post.date).toUTCString(),
       },
